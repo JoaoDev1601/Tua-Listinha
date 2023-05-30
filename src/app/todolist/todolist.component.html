@@ -1,0 +1,43 @@
+<div class="container">
+
+    <h1 class="title">Tua Listinha</h1>
+
+    <hr>
+
+    <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+        <div class="form-group">
+          <label for="task">A fazer</label>
+          <input type="text" class="form-control" id="task" placeholder="O que tem a fazer?" ngModel name="task" required>
+          <small *ngIf="taskForm.invalid && taskForm.dirty" id="errorMessage" class="form-text text-danger">Preencha o campo acima!</small>
+        </div>
+
+        <button [disabled]="taskForm.invalid" id="submitBtn" type="submit" class="btn btn-primary">Adicionar</button>
+    </form>
+
+    <hr>
+
+    <table class="table table-striped">
+
+        <thead>
+
+            <tr>
+                <th scope="col">A Fazer</th>
+                <th scope="col">Feito</th>
+                <th scope="col">Deletar</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let ts of taskArray; index as i">
+                <td>{{ts.taskName}}</td>
+                <td><input (change)="onCheck(i)" id="checkbox" type="checkbox"></td>
+                <td><button class="btn btn-danger btn-sm" (click)="onDelete(i)">Deletar</button></td>
+          </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
